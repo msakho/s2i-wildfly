@@ -18,15 +18,7 @@ The resulting image can be run using [Docker](http://docker.io).
 Versions
 ---------------
 WildFly versions currently provided are:
-* WildFly v8.1 (deprecated)
-* WildFly v9.0 (deprecated)
-* WildFly v10.0 (10.0.0 Final)
-* WildFly v10.1
-* WildFly v11.0
-* WildFly v12.0
-* WildFly v13.0
-* WildFly v14.0
-* WildFly v15.0
+
 * WildFly v16.0
 
 CentOS versions currently provided are:
