@@ -3,12 +3,13 @@
 
 FROM centos/s2i-base-centos7
 
-MAINTAINER Adam Kaplan <adam.kaplan@redhat.com>
+MAINTAINER Meissa Sakho <msakho@redhat.com>
 
 EXPOSE 8080
 
 ENV WILDFLY_VERSION=16.0.0.Final \
     MAVEN_VERSION=3.5.4
+    WILDFLY_HOME=/wildfly
 
 LABEL io.k8s.description="Platform for building and running JEE applications on WildFly 16.0.0.Final" \
       io.k8s.display-name="WildFly 16.0.0.Final" \
@@ -17,7 +18,7 @@ LABEL io.k8s.description="Platform for building and running JEE applications on 
       io.openshift.s2i.assemble-input-files="/wildfly/standalone/deployments;/wildfly/standalone/configuration;/wildfly/provided_modules" \
       io.openshift.s2i.destination="/opt/s2i/destination" \
       com.redhat.deployments-dir="/wildfly/standalone/deployments" \
-      maintainer="Adam Kaplan <adam.kaplan@redhat.com>"
+      maintainer="Meissa SAKHO <msakho@redhat.com>"
 
 # Install Maven, Wildfly
 RUN INSTALL_PKGS="tar unzip bc which lsof java-11-openjdk java-11-openjdk-devel" && \
@@ -37,7 +38,7 @@ ADD ./contrib/wfmodules/ /wildfly/modules/
 ADD ./contrib/wfbin/standalone.conf /wildfly/bin/standalone.conf
 ADD ./contrib/wfcfg/standalone.xml /wildfly/standalone/configuration/standalone.xml
 ADD ./contrib/settings.xml $HOME/.m2/
-ADD ./contrib/custom-scripts/ /wildfly/standalone/custom-scripts/
+# ADD ./contrib/custom-scripts/ /wildfly/standalone/custom-scripts/
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH

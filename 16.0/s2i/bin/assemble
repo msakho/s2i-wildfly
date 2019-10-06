@@ -370,10 +370,17 @@ if [ -d $LOCAL_SOURCE_DIR/modules ]; then
   chmod -R g+rw /wildfly/provided_modules
 fi
 
-mkdir /wildfly/custom_scripts
+mkdir /wildfly/custom-scripts
 if [ -d $LOCAL_SOURCE_DIR/scripts ]; then
   echo "COPYING CUSTOM SCRIPTS FROM PROJECT..."
-  cp -r scripts/* /wildfly/custom_scripts
+  cp -r scripts/* /wildfly/custom-scripts
+
+  chgrp -R 0 /wildfly/custom-scripts
+  chmod -R g+rwx /wildfly/custom-scripts
+  chmod +x /wildfly/custom-scripts/configure-standalone.sh
+  
+  echo "STARTING CUSTOM CONFIGURATION" 
+  /wildfly/custom-scripts/configure-standalone.sh
   
 fi
 
